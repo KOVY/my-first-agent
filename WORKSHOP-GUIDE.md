@@ -79,14 +79,41 @@ Po přihlášení se vrať do terminálu. Měl bys vidět potvrzení.
 
 ---
 
-## Krok 4: Stáhni starter kit (1 minuta)
+## Krok 4: Nainstaluj Git a stáhni starter kit (2 minuty)
 
+Ověř jestli máš git:
 ```bash
+git --version
+```
+
+Pokud ne, nainstaluj:
+
+**Linux (Ubuntu/Debian):**
+```bash
+sudo apt-get install -y git
+```
+
+**Mac:**
+```bash
+xcode-select --install
+```
+
+**Windows:**
+```cmd
+winget install Git.Git
+```
+
+> 💡 Na Linuxu/Macu budeš potřebovat heslo administrátora (sudo). Pokud ho neznáš, zeptej se toho, kdo ti nastavoval počítač.
+
+Teď stáhni starter kit:
+```bash
+mkdir -p ~/muj-agent
+cd ~/muj-agent
 git clone https://github.com/KOVY/my-first-agent.git
 cd my-first-agent
 ```
 
-> 💡 Nemáš git? Stáhni ZIP z https://github.com/KOVY/my-first-agent → zelené tlačítko "Code" → "Download ZIP" → rozbal → otevři složku v terminálu.
+> 💡 Alternativa bez gitu: Stáhni ZIP z https://github.com/KOVY/my-first-agent → zelené tlačítko "Code" → "Download ZIP" → rozbal → otevři složku v terminálu.
 
 ---
 
@@ -217,7 +244,10 @@ Pokud chceš agenta který:
 Zavři a znovu otevři terminál. Pokud nepomůže: `npm install -g @qwen-code/qwen-code@latest`
 
 ### "command not found: git"
-Stáhni ZIP místo klonování (viz Krok 4).
+Nainstaluj: `sudo apt-get install -y git` (Linux) / `xcode-select --install` (Mac) / `winget install Git.Git` (Windows). Nebo stáhni ZIP (viz Krok 4).
+
+### Sudo heslo / "Permission denied"
+Na Linuxu/Macu některé instalace vyžadují administrátorské heslo. Zadej heslo, které používáš k přihlášení do počítače. Při psaní hesla se nezobrazují žádné znaky — to je normální, jen piš a stiskni Enter.
 
 ### "command not found: node"
 Nainstaluj Node.js z https://nodejs.org
