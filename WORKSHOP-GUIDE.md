@@ -14,7 +14,24 @@ node --version
 
 Pokud vidíš `v20.x.x` nebo vyšší → jdi na Krok 2.
 
-Pokud ne → stáhni z https://nodejs.org (velké zelené tlačítko "LTS"). Nainstaluj, restartuj terminál.
+Pokud ne → nainstaluj jedním příkazem:
+
+**Windows (PowerShell jako Admin):**
+```powershell
+winget install OpenJS.NodeJS.LTS
+```
+
+**Mac:**
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash && source ~/.bashrc && nvm install --lts
+```
+
+**Linux (Ubuntu/Debian):**
+```bash
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - && sudo apt-get install -y nodejs
+```
+
+Po instalaci **zavři a znovu otevři terminál**, pak ověř: `node --version`
 
 **Jak otevřít terminál:**
 - **Windows:** Stiskni `Win + R`, napiš `cmd`, Enter
