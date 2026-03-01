@@ -167,6 +167,29 @@ Najdi mi na webu co je OpenClaw.
 
 ---
 
+## 🔒 Bonus: Zabezpečení (volitelné, 2 minuty)
+
+Chceš mít svého agenta dostupného bezpečně odkudkoliv? Nainstaluj [Tailscale](https://tailscale.com) — zdarma, šifrovaná síť, žádná konfigurace.
+
+**Jeden příkaz:**
+
+**Linux:**
+```bash
+curl -fsSL https://tailscale.com/install.sh | sh && sudo tailscale up
+```
+
+**Mac:**
+```bash
+brew install tailscale && tailscale up
+```
+
+**Windows:**
+Stáhni z https://tailscale.com/download/windows
+
+Po přihlášení (Google účet) máš bezpečné spojení mezi všemi svými zařízeními. Tvůj agent běží doma, ty se připojíš z kavárny, vlaku, odkudkoliv.
+
+---
+
 ## 🔥 Bonus: Co dál?
 
 ### Agent si pamatuje
