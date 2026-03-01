@@ -1,8 +1,8 @@
 # USER.md — Příklad
 
 ## Základní info
-- **Jméno:** Tereza
-- **Oslovení:** Terko, tykání
+- **Jméno:** Sofie
+- **Oslovení:** Sofi, tykání
 - **Jazyk:** čeština
 - **Časové pásmo:** Europe/Prague
 
