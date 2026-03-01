@@ -1,0 +1,15 @@
+# Osobní data (neverzovat)
+.env
+*.key
+*.secret
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Paměť agenta (každý má svou)
+memory/*.md
+!memory/.gitkeep
