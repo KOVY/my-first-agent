@@ -250,13 +250,33 @@ mkdir -p memory
 ### Přidej skills
 V složce `skills/` jsou dvě dovednosti (web search, počasí). Můžeš přidat vlastní — stačí vytvořit složku s `SKILL.md`.
 
-### Přejdi na OpenClaw (level 2)
-Pokud chceš agenta který:
-- 📱 Běží 24/7 a píše ti na Telegram/WhatsApp/Discord
-- 🤝 Spolupracuje s dalšími agenty
-- 🔄 Pracuje i když spíš
+### OpenClaw — webchat místo terminálu (doporučeno!)
 
-→ https://openclaw.ai — a tvůj starter kit je s ním plně kompatibilní.
+Nechceš psát v terminálu? Nainstaluj OpenClaw a získáš krásný webchat v prohlížeči:
+
+```bash
+# Instalace
+curl -fsSL https://get.openclaw.ai | bash
+
+# Zapni Qwen (zdarma, 2000 požadavků/den)
+openclaw plugins enable qwen-portal-auth
+openclaw models auth login --provider qwen-portal --set-default
+
+# Spusť
+openclaw gateway
+```
+
+Otevři prohlížeč → **http://localhost:18789** → hotovo! 🎉
+
+Agent automaticky čte tvůj SOUL.md, USER.md a má vlastní paměť. Komunikuješ pohodlně v prohlížeči, jako bys chatoval s kamarádem.
+
+**Bonusy OpenClaw oproti terminálu:**
+- 📱 Připoj Telegram, Discord, WhatsApp
+- 🔄 Běží 24/7 i když zavřeš prohlížeč
+- 🤝 Agent spolupracuje s dalšími agenty
+- 🧠 Automatická paměť mezi sessions
+
+→ Dokumentace: https://docs.openclaw.ai
 
 ---
 
