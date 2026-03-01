@@ -182,8 +182,30 @@ Najdi mi na webu co je OpenClaw.
 
 ## Krok 7: Připoj se ke komunitě (2 minuty)
 
-1. Otevři Discord (pokud nemáš, stáhni z https://discord.com)
-2. Klikni na invite link: **https://discord.gg/HfBkbD2k**
+Nemáš Discord? Nainstaluj jedním příkazem:
+
+**Linux (Ubuntu/Debian):**
+```bash
+sudo snap install discord
+```
+
+> Nemáš snap? Alternativa: `sudo apt install -y flatpak && flatpak install flathub com.discordapp.Discord -y`
+>
+> Nebo stáhni .deb z https://discord.com/api/download?platform=linux&format=deb a nainstaluj: `sudo dpkg -i discord-*.deb`
+
+**Mac:**
+```bash
+brew install --cask discord
+```
+
+**Windows:**
+```cmd
+winget install Discord.Discord
+```
+
+Po instalaci spusť Discord, vytvoř si účet (nebo se přihlas) a klikni na invite link:
+
+1. **https://discord.gg/HfBkbD2k**
 3. Připoj se na server **KOWEX Community**
 4. Napiš do kanálu `#show-your-agent`:
    - Jak se tvůj agent jmenuje?
