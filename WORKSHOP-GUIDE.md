@@ -256,7 +256,7 @@ Nechceš psát v terminálu? Nainstaluj OpenClaw a získáš krásný webchat v 
 
 ```bash
 # Instalace
-curl -fsSL https://get.openclaw.ai | bash
+curl -fsSL https://openclaw.ai/install.sh | bash
 
 # Zapni Qwen (zdarma, 2000 požadavků/den)
 openclaw plugins enable qwen-portal-auth
