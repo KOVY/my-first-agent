@@ -104,7 +104,7 @@ Tento starter kit je s OpenClaw plně kompatibilní. Stačí nainstalovat OpenCl
 
 Připoj se k nám na Discordu — sdílej co tvůj agent umí, získej tipy, potkej další lidi s agenty:
 
-👉 **[Discord — My First Agent Community](https://discord.gg/TODO)**
+👉 **[Discord — KOWEX Community](https://discord.gg/HfBkbD2k)**
 
 ---
 
