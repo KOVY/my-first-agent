@@ -47,6 +47,8 @@ Na stejné stránce (Bot) sjeď dolů k **Privileged Gateway Intents** a zapni:
 
 ## Krok 5: Propoj s OpenClaw (1 minuta)
 
+> 💡 **Zkratka:** `bash scripts/setup-discord-bot.sh` — provede kroky 5-6 automaticky!
+
 V terminálu na svém počítači:
 
 ```bash

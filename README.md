@@ -115,3 +115,15 @@ MIT — používej, upravuj, sdílej.
 ---
 
 *Vytvořeno s ❤️ firmou [KOWEX Co. Holding](https://kowexconsulting.cz) — 9 firem, 13 AI agentů, 0 zaměstnanců.*
+
+---
+
+## 🔧 Skripty
+
+| Skript | Co dělá |
+|--------|---------|
+| `scripts/setup-discord-bot.sh` | Rychlé nastavení Discord bota (interaktivní průvodce) |
+
+```bash
+bash scripts/setup-discord-bot.sh
+```
