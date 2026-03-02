@@ -1,59 +1,63 @@
 # 🤖 My First Agent
 
-**Za 10 minut máš vlastního AI agenta. Zdarma.**
+**Za 15 minut máš vlastního AI agenta. Zdarma.**
 
-Tento repozitář ti dá vše, co potřebuješ k vytvoření osobního AI asistenta — s vlastním jménem, pamětí a osobností. Žádné programování, žádná kreditka.
+Vlastní jméno, paměť, osobnost. Webchat v prohlížeči. Volitelně Discord bot 24/7.
+Žádné programování, žádná kreditka.
 
 ---
 
 ## 🚀 Rychlý start
 
-### Krok 1: Nainstaluj Qwen Code (2 minuty)
+### Krok 1: Nainstaluj prerequisites
 
-**macOS / Linux:**
-```bash
-curl -fsSL https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/installation/install-qwen.sh | bash
-```
+Potřebuješ **Node.js 22+** a **Git**. Viz [WORKSHOP-GUIDE.md](WORKSHOP-GUIDE.md) pro přesné příkazy na tvůj systém (Linux/Mac/Windows).
 
-**Windows:**
-```cmd
-curl -fsSL -o %TEMP%\install-qwen.bat https://qwen-code-assets.oss-cn-hangzhou.aliyuncs.com/installation/install-qwen.bat && %TEMP%\install-qwen.bat
-```
-
-> 💡 Potřebuješ [Node.js 20+](https://nodejs.org/en/download). Po instalaci restartuj terminál.
-
-### Krok 2: Přihlas se (1 minuta)
+### Krok 2: Nastav PATH a nainstaluj OpenClaw
 
 ```bash
-qwen
+# PATH (Linux/Mac)
+mkdir -p ~/.npm-global
+npm config set prefix '~/.npm-global'
+export PATH="$HOME/.npm-global/bin:$PATH"
+echo 'export PATH="$HOME/.npm-global/bin:$PATH"' >> ~/.bashrc
+
+# Instalace OpenClaw
+cd /tmp && npm pack openclaw@latest
+npm install -g ./openclaw-*.tgz
 ```
 
-V Qwen Code napiš:
-```
-/auth
-```
-
-Přihlas se přes prohlížeč — je to zdarma, 1000 požadavků denně.
-
-### Krok 3: Klonuj tento repozitář (1 minuta)
+### Krok 3: Nastav Qwen model (zdarma)
 
 ```bash
+openclaw plugins enable qwen-portal-auth
+openclaw models auth login --provider qwen-portal --set-default
+openclaw models set qwen-portal/coder-model
+```
+
+Přihlas se přes prohlížeč — zdarma, 1000 požadavků/den.
+
+### Krok 4: Stáhni a uprav
+
+```bash
+mkdir -p ~/openclaw && cd ~/openclaw
 git clone https://github.com/KOVY/my-first-agent.git
 cd my-first-agent
+
+# Zkopíruj příklady a uprav
+cp examples/SOUL-example.md SOUL.md
+cp examples/USER-example.md USER.md
+nano SOUL.md   # dej agentovi jméno a osobnost
+nano USER.md   # napiš kdo jsi ty
 ```
 
-### Krok 4: Vyplň kdo jsi (5 minut)
-
-Otevři `SOUL.md` a vyplň šablonu — dej svému agentovi jméno, osobnost a hodnoty.
-Otevři `USER.md` a napiš pár vět o sobě.
-
-### Krok 5: Spusť agenta 🎉
+### Krok 5: Spusť! 🎉
 
 ```bash
-qwen
+openclaw gateway --port 18789
 ```
 
-Tvůj agent tě zná, ví kdo je, a je připravený pomáhat.
+Otevři prohlížeč → **http://localhost:18789** → Tvůj agent je tam!
 
 ---
 
@@ -84,27 +88,20 @@ Tvůj agent čte soubory v tomto repozitáři jako svou "paměť" a "identitu". 
 
 ---
 
-## ⚡ Chceš víc?
+## 💬 Discord — připoj se a připoj svého agenta
 
-### OpenClaw — plný agentní systém
-
-Pokud chceš agenta, který:
-- 📱 Komunikuje přes Telegram, Discord, WhatsApp
-- 🔄 Běží 24/7 i když nemáš otevřený terminál
-- 🧩 Má pokročilé skills a automatizace
-- 🤝 Spolupracuje s dalšími agenty
-
-→ Podívej se na [OpenClaw](https://openclaw.ai) — [dokumentace](https://docs.openclaw.ai).
-
-Tento starter kit je s OpenClaw plně kompatibilní. Stačí nainstalovat OpenClaw do tohoto adresáře a vše funguje dál.
-
----
-
-## 🏢 Komunita
-
-Připoj se k nám na Discordu — sdílej co tvůj agent umí, získej tipy, potkej další lidi s agenty:
+### Komunita
+Připoj se k nám — sdílej co tvůj agent umí, získej tipy, potkej další lidi s agenty:
 
 👉 **[Discord — KOWEX Community](https://discord.gg/HfBkbD2k)**
+
+### Discord bot (tvůj agent na Discordu 24/7)
+Podrobný návod: **[DISCORD-BOT-SETUP.md](DISCORD-BOT-SETUP.md)**
+
+Nebo rychle:
+```bash
+bash scripts/setup-discord-bot.sh
+```
 
 ---
 
@@ -114,16 +111,4 @@ MIT — používej, upravuj, sdílej.
 
 ---
 
-*Vytvořeno s ❤️ firmou [KOWEX Co. Holding](https://kowexconsulting.cz) — 9 firem, 13 AI agentů, 0 zaměstnanců.*
-
----
-
-## 🔧 Skripty
-
-| Skript | Co dělá |
-|--------|---------|
-| `scripts/setup-discord-bot.sh` | Rychlé nastavení Discord bota (interaktivní průvodce) |
-
-```bash
-bash scripts/setup-discord-bot.sh
-```
+*Vytvořeno s ❤️ firmou [KOWEX Co. Holding](https://kowexconsulting.cz) — 13 firem, 13 AI agentů, 0 zaměstnanců.*

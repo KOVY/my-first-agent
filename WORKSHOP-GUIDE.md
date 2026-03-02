@@ -1,63 +1,73 @@
-# 🎯 Workshop Guide — Tvůj AI Agent za 30 minut
+# 🎯 Workshop Guide — Tvůj AI Agent za 20 minut
 
-> Otestováno na čistém Linuxu (Lenovo G50, Ubuntu). Krok za krokem.
+> Otestováno na čistém Linuxu, Windows i Macu. Krok za krokem.
 > Potřebuješ: notebook s internetem. To je vše.
 
 ---
 
-## Fáze 1: Základy (terminál — 10 minut)
+## Co budeš mít na konci
+
+✅ Vlastního AI agenta s jménem, pamětí a osobností
+✅ Webchat v prohlížeči — jako ChatGPT, ale tvůj vlastní
+✅ Připojení na Discord komunitu
+✅ Zdarma — žádná kreditka
+
+---
+
+## Fáze 1: Příprava systému (5 minut)
 
 ### Krok 1: Otevři terminál
 
-- **Linux:** `Ctrl + Alt + T`
-- **Mac:** Spotlight (`Cmd + Space`) → `Terminal`
-- **Windows:** `Win + R` → `cmd` (doporučujeme WSL2)
+| Systém | Jak |
+|--------|-----|
+| **Linux** | `Ctrl + Alt + T` |
+| **Mac** | Spotlight (`Cmd + Space`) → `Terminal` |
+| **Windows** | `Win + R` → `cmd` (doporučujeme [WSL2](https://learn.microsoft.com/cs-cz/windows/wsl/install)) |
 
-### Krok 2: Nainstaluj základní nástroje
+### Krok 2: Nainstaluj Node.js 22+
 
-**Node.js 22+ (povinné):**
-
-Linux:
+**Linux:**
 ```bash
 curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - && sudo apt-get install -y nodejs
 ```
 
-Mac:
+**Mac:**
 ```bash
 brew install node
 ```
 
-Windows (PowerShell jako Admin):
+**Windows (PowerShell jako Admin):**
 ```powershell
 winget install OpenJS.NodeJS.LTS
 ```
 
-**Git (povinné):**
+> 💡 **Sudo heslo (Linux/Mac):** Při psaní hesla se nezobrazují žádné znaky — to je normální! Piš a stiskni Enter.
 
-Linux:
+### Krok 3: Nainstaluj Git
+
+**Linux:**
 ```bash
 sudo apt-get install -y git
 ```
 
-Mac:
+**Mac:**
 ```bash
 xcode-select --install
 ```
 
-Windows:
-```cmd
+**Windows:**
+```powershell
 winget install Git.Git
 ```
 
-> 💡 **Sudo heslo:** Na Linuxu/Macu se při psaní hesla nezobrazují žádné znaky — to je normální! Jen piš a stiskni Enter.
-
-Po instalaci **zavři a znovu otevři terminál**, pak ověř:
+**Ověř instalaci** (zavři a znovu otevři terminál):
 ```bash
 node --version && git --version
 ```
 
-### Krok 3: Nastav PATH pro npm globální balíčky
+### Krok 4: Nastav PATH pro npm globální balíčky
 
+**Linux / Mac:**
 ```bash
 mkdir -p ~/.npm-global
 npm config set prefix '~/.npm-global'
@@ -65,9 +75,47 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 echo 'export PATH="$HOME/.npm-global/bin:$PATH"' >> ~/.bashrc
 ```
 
-> ⚠️ **Důležité!** Bez tohoto kroku OpenClaw příkaz nebude nalezen.
+**Windows (PowerShell):**
+```powershell
+npm config set prefix "$env:APPDATA\npm"
+```
 
-### Krok 4: Stáhni starter kit
+> ⚠️ **Důležité!** Bez tohoto kroku příkaz `openclaw` nebude nalezen. Po nastavení **zavři a znovu otevři terminál**.
+
+---
+
+## Fáze 2: Instalace OpenClaw + Qwen model (5 minut)
+
+### Krok 5: Nainstaluj OpenClaw
+
+**Všechny systémy:**
+```bash
+cd /tmp && npm pack openclaw@latest
+npm install -g ./openclaw-*.tgz
+```
+
+> 💡 Pokud se OpenClaw ptá na Anthropic API klíč — přeskoč (Enter). Budeme používat Qwen zdarma.
+
+### Krok 6: Nastav Qwen jako výchozí model (ZDARMA)
+
+```bash
+openclaw plugins enable qwen-portal-auth
+openclaw models auth login --provider qwen-portal --set-default
+```
+
+Otevře se prohlížeč → přihlas se (Google/GitHub účet). **Zdarma**, 1000 požadavků denně.
+
+```bash
+openclaw models set qwen-portal/coder-model
+```
+
+> ✅ **Checkpoint:** OpenClaw nainstalován, Qwen model nastaven. Žádná kreditka.
+
+---
+
+## Fáze 3: Tvůj agent (5 minut)
+
+### Krok 7: Stáhni starter kit
 
 ```bash
 mkdir -p ~/openclaw
@@ -76,57 +124,63 @@ git clone https://github.com/KOVY/my-first-agent.git
 cd my-first-agent
 ```
 
----
+### Krok 8: Dej agentovi identitu
 
-## Fáze 2: Qwen Code — agent v terminálu (5 minut)
-
-### Krok 5: Nainstaluj a přihlas se do Qwen
+Zkopíruj příklady a uprav podle sebe:
 
 ```bash
-npm install -g @qwen-code/qwen-code@latest
-qwen
+cp examples/SOUL-example.md SOUL.md
+cp examples/USER-example.md USER.md
 ```
 
-V Qwen Code napiš:
-```
-/auth
+Otevři `SOUL.md` v editoru a změň jméno, osobnost, styl:
+
+**Linux:** `nano SOUL.md` (uložit: `Ctrl+O`, ukončit: `Ctrl+X`)
+**Mac:** `nano SOUL.md` nebo `open SOUL.md`
+**Windows:** `notepad SOUL.md`
+
+Stejně tak `USER.md` — napiš kdo jsi ty.
+
+> 💡 **Tip:** Čím víc detailů v SOUL.md, tím víc je agent "tvůj". Ale i s příkladem to funguje hned.
+
+### Krok 9: Spusť agenta! 🎉
+
+```bash
+openclaw gateway --port 18789
 ```
 
-Otevře se prohlížeč → přihlas se (Google účet). **Zdarma**, 1000 požadavků/den.
+Otevři prohlížeč → **http://localhost:18789**
 
-Vyzkoušej:
+Napiš:
 ```
-Ahoj! Přečti si SOUL.md a USER.md a představ se.
+Ahoj! Kdo jsi? Představ se.
 ```
 
-> ✅ **Checkpoint:** Qwen Code funguje, agent odpovídá. Ukonči: `Ctrl + C`
+> ✅ **Checkpoint:** Webchat funguje, agent se představil jménem z SOUL.md. **Máš vlastního AI agenta!**
 
 ---
 
-## Fáze 3: Discord — připoj se ke komunitě (5 minut)
+## Fáze 4: Discord — připoj se ke komunitě (5 minut)
 
-> ⚠️ **Tento krok udělejte TEĎ, než spustíte webchat!**
+### Krok 10: Nainstaluj Discord
 
-### Krok 6: Nainstaluj Discord
-
-Linux:
+**Linux:**
 ```bash
 sudo snap install discord
 ```
-
 > Nemáš snap? `wget -O discord.deb "https://discord.com/api/download?platform=linux&format=deb" && sudo dpkg -i discord.deb && sudo apt-get install -f -y`
 
-Mac:
+**Mac:**
 ```bash
 brew install --cask discord
 ```
 
-Windows:
-```cmd
+**Windows:**
+```powershell
 winget install Discord.Discord
 ```
 
-### Krok 7: Připoj se k KOWEX Community
+### Krok 11: Připoj se k KOWEX Community
 
 1. Spusť Discord
 2. Vytvoř účet (nebo se přihlas)
@@ -139,116 +193,53 @@ winget install Discord.Discord
 
 ---
 
-## Fáze 4: OpenClaw — webchat v prohlížeči (10 minut)
+## Fáze 5: Discord bot — agent na Discordu 24/7 (bonus)
 
-### Krok 8: Nainstaluj OpenClaw
+Chceš aby tvůj agent automaticky odpovídal na Discordu? Podrobný návod: **[DISCORD-BOT-SETUP.md](DISCORD-BOT-SETUP.md)**
 
+Rychlý přehled:
+
+1. **Vytvoř bota** na https://discord.com/developers/applications
+2. **Zkopíruj token** (Bot → Reset Token)
+3. **Zapni** Message Content Intent + Server Members Intent
+4. **Přidej na server** (OAuth2 → bot + applications.commands → zkopíruj URL)
+5. **Propoj s OpenClaw:**
 ```bash
-cd /tmp && npm pack openclaw@latest
-npm install -g ./openclaw-*.tgz
+openclaw config set channels.discord.enabled true
+openclaw config set channels.discord.token "TVŮJ_BOT_TOKEN"
+openclaw gateway restart
 ```
+6. **Ověř:** `@TvůjBot ahoj!` na Discordu
 
-> 💡 Pokud `openclaw` příkaz nefunguje, zavři a znovu otevři terminál (kvůli PATH z Kroku 3).
-
-### Krok 9: Nastav Qwen jako výchozí model (ZDARMA)
-
-```bash
-openclaw plugins enable qwen-portal-auth
-openclaw models auth login --provider qwen-portal --set-default
-openclaw models set qwen-portal/coder-model
-```
-
-> ⚠️ **Důležité:** Pokud se OpenClaw ptá na Anthropic API klíč — přeskoč ho (Enter). Qwen je zdarma a funguje skvěle.
-
-### Krok 10: Vyplň identitu agenta
-
-Otevři `SOUL.md` v textovém editoru a vyplň (nebo zkopíruj příklad):
-
-```bash
-cp examples/SOUL-example.md SOUL.md
-cp examples/USER-example.md USER.md
-nano SOUL.md   # uprav podle sebe
-nano USER.md   # uprav podle sebe
-```
-
-> 💡 **Tip:** Čím víc detailů v SOUL.md, tím víc je agent "tvůj". Ale i s příkladem to funguje hned.
-
-### Krok 11: Spusť webchat! 🎉
-
-```bash
-cd ~/openclaw/my-first-agent
-openclaw gateway --port 18789
-```
-
-Otevři prohlížeč → **http://localhost:18789**
-
-Tvůj agent je tam! Napíš mu:
-```
-Ahoj, kdo jsi? Představ se.
-```
-
-> ✅ **Checkpoint:** Webchat funguje, agent se představil jménem z SOUL.md.
+> 💡 Nebo použij skript: `bash scripts/setup-discord-bot.sh`
 
 ---
 
-## Fáze 5: Propojení (bonus — 5 minut)
+## Fáze 6: Browser Relay (bonus)
 
-### Browser Relay (agent vidí tvůj prohlížeč)
+Chceš aby tvůj agent viděl co máš otevřené v prohlížeči?
 
-V Chrome/Edge nainstaluj rozšíření **OpenClaw Browser Relay**:
-1. Otevři `chrome://extensions`
-2. Hledej "OpenClaw" nebo stáhni z Chrome Web Store
-3. Klikni na ikonku rozšíření → Attach Tab
-
-Tvůj agent teď vidí co máš otevřené v prohlížeči a může ti pomáhat přímo na stránkách.
-
-### Discord bot (agent píše na Discord)
-
-Pokud chceš aby tvůj agent automaticky odpovídal na Discordu:
-1. Vytvoř bota: https://discord.com/developers/applications
-2. Nastav v OpenClaw: `openclaw config set channels.discord.token "TVŮ_BOT_TOKEN"`
-3. Agent je teď na Discordu 24/7
-
-> Tento krok je pokročilý — Alan Spark na Discordu ti rád pomůže.
+1. V Chrome/Edge nainstaluj rozšíření **OpenClaw Browser Relay**
+2. Klikni na ikonku rozšíření → **Attach Tab**
+3. Agent teď vidí stránku a může ti pomáhat přímo na webu
 
 ---
 
 ## ❓ Časté problémy
 
-### "command not found: openclaw"
-```bash
-export PATH="$HOME/.npm-global/bin:$PATH"
-```
-Nebo zavři a znovu otevři terminál.
-
-### "command not found: qwen"
-Zavři a znovu otevři terminál. Pokud nepomůže: `npm install -g @qwen-code/qwen-code@latest`
-
-### "command not found: node"
-Nainstaluj Node.js (viz Krok 2).
-
-### "command not found: git"
-Nainstaluj git (viz Krok 2).
-
-### Sudo heslo / "Permission denied"
-Zadej heslo k přihlášení do počítače. Při psaní se nezobrazují znaky — to je normální.
-
-### OpenClaw se ptá na Anthropic API klíč
-Přeskoč (Enter). Nastav Qwen: `openclaw models set qwen-portal/coder-model`
-
-### Agent neodpovídá česky
-Přidej do SOUL.md: `**Jazyk:** čeština`
-
-### Agent nezná mé jméno
-Vyplň USER.md a restartuj gateway (`Ctrl + C`, spusť znovu).
-
----
-
-## 📞 Pomoc
-
-- **Discord:** https://discord.gg/HfBkbD2k (@Alan Spark pomůže)
-- **GitHub:** https://github.com/KOVY/my-first-agent (issues)
-- **Email:** alan.spark@kowexconsulting.cz
+| Problém | Řešení |
+|---------|--------|
+| `command not found: openclaw` | `export PATH="$HOME/.npm-global/bin:$PATH"` a znovu otevři terminál |
+| `command not found: node` | Nainstaluj Node.js (Krok 2) |
+| `command not found: git` | Nainstaluj Git (Krok 3) |
+| Sudo heslo / "Permission denied" | Zadej heslo k počítači. Znaky se nezobrazují — to je normální |
+| OpenClaw se ptá na Anthropic API klíč | Přeskoč (Enter). Qwen je nastaven v Kroku 6 |
+| Qwen auth nefunguje v prohlížeči | Zkus jiný prohlížeč nebo `openclaw models auth login --provider qwen-portal --set-default` znovu |
+| Agent neodpovídá česky | Přidej do SOUL.md: `**Jazyk:** čeština` |
+| Agent nezná mé jméno | Vyplň USER.md a restartuj gateway (`Ctrl + C`, spusť znovu) |
+| Webchat se nenačítá | Ověř že gateway běží: `openclaw gateway status` |
+| Discord bot — seznam serverů prázdný | Musíš být přihlášen jako **vlastník serveru**, ne jako bot |
+| Discord bot neodpovídá | Zapni Message Content Intent v Developer Portal |
 
 ---
 
@@ -256,15 +247,23 @@ Vyplň USER.md a restartuj gateway (`Ctrl + C`, spusť znovu).
 
 | Čas | Co děláme |
 |-----|-----------|
-| 0:00–0:10 | Fáze 1: Instalace základů (Node, Git, PATH) |
-| 0:10–0:15 | Fáze 2: Qwen Code — první konverzace s agentem |
-| 0:15–0:20 | Fáze 3: Discord — připojení ke komunitě |
-| 0:20–0:30 | Fáze 4: OpenClaw webchat — plný agent v prohlížeči |
-| 0:30+ | Fáze 5: Customizace, propojení, experimenty |
+| 0:00–0:05 | Fáze 1: Instalace základů (Node, Git, PATH) |
+| 0:05–0:10 | Fáze 2: OpenClaw + Qwen model |
+| 0:10–0:15 | Fáze 3: Identita agenta → webchat funguje! |
+| 0:15–0:20 | Fáze 4: Discord — připojení ke komunitě |
+| 0:20+ | Fáze 5–6: Discord bot, Browser Relay, experimenty |
 
-> 💡 **Realisticky:** Počítej s 45–60 minut pro celý setup (lidi mají různé systémy). Zbytek času = hraní si s agentem, sdílení na Discordu, networking.
+> 💡 **Realisticky:** Počítej s 30–45 minut (lidi mají různé systémy). Zbytek = hraní si s agentem, sdílení na Discordu, networking.
+
+---
+
+## 📞 Pomoc
+
+- **Discord:** https://discord.gg/HfBkbD2k (Alan Spark pomůže 24/7)
+- **GitHub:** https://github.com/KOVY/my-first-agent (issues)
+- **Email:** alan.spark@kowexconsulting.cz
 
 ---
 
 *Vytvořeno pro Phantom Office Workshop — KOWEX Co. Holding*
-*Otestováno na Ubuntu Linux (Lenovo G50) — 1. března 2026*
+*Otestováno na Ubuntu Linux, Windows, macOS — březen 2026*
