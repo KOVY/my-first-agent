@@ -1,6 +1,6 @@
 # 🤖 My First Agent
 
-**Za 15 minut máš vlastního AI agenta. Zdarma.**
+**Za jedno odpoledne máš vlastního AI agenta. Zdarma.**
 
 Vlastní jméno, paměť, osobnost. Webchat v prohlížeči. Volitelně Discord bot 24/7.
 Žádné programování, žádná kreditka.
@@ -9,35 +9,55 @@ Vlastní jméno, paměť, osobnost. Webchat v prohlížeči. Volitelně Discord 
 
 ## 🚀 Rychlý start
 
-### Krok 1: Nainstaluj prerequisites
+### Krok 1: Nainstaluj Node.js 22+
 
-Potřebuješ **Node.js 22+** a **Git**. Viz [WORKSHOP-GUIDE.md](WORKSHOP-GUIDE.md) pro přesné příkazy na tvůj systém (Linux/Mac/Windows).
+**Linux:**
+```bash
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - && sudo apt-get install -y nodejs
+```
 
-### Krok 2: Nastav PATH a nainstaluj OpenClaw
+**Mac:**
+```bash
+brew install node
+```
+
+**Windows (PowerShell jako Admin):**
+```powershell
+winget install OpenJS.NodeJS.LTS
+```
+
+Zavři a znovu otevři terminál. Ověř: `node --version` (musí být 22+).
+
+### Krok 2: Nainstaluj Git + nastav PATH
 
 ```bash
-# PATH (Linux/Mac)
+# Git (Linux — Mac: xcode-select --install, Windows: winget install Git.Git)
+sudo apt-get install -y git
+
+# PATH pro npm globální balíčky (Linux/Mac)
 mkdir -p ~/.npm-global
 npm config set prefix '~/.npm-global'
 export PATH="$HOME/.npm-global/bin:$PATH"
 echo 'export PATH="$HOME/.npm-global/bin:$PATH"' >> ~/.bashrc
-
-# Instalace OpenClaw
-cd /tmp && npm pack openclaw@latest
-npm install -g ./openclaw-*.tgz
 ```
 
-### Krok 3: Nastav Qwen model (zdarma)
+### Krok 3: Vyber si AI engine (zdarma)
 
+Máš na výběr — oba fungují skvěle a jsou zdarma:
+
+**Varianta A: Gemini CLI (Google) ⭐ doporučujeme**
 ```bash
-openclaw plugins enable qwen-portal-auth
-openclaw models auth login --provider qwen-portal --set-default
-openclaw models set qwen-portal/coder-model
+npm install -g @google/gemini-cli
+gemini    # přihlas se Google účtem v prohlížeči
 ```
 
-Přihlas se přes prohlížeč — zdarma, 1000 požadavků/den.
+**Varianta B: Qwen Code (Alibaba)**
+```bash
+npm install -g @qwen-code/qwen-code@latest
+qwen      # napiš /auth → přihlas se v prohlížeči
+```
 
-### Krok 4: Stáhni a uprav
+### Krok 4: Stáhni repo a uprav identitu
 
 ```bash
 mkdir -p ~/openclaw && cd ~/openclaw
@@ -51,13 +71,37 @@ nano SOUL.md   # dej agentovi jméno a osobnost
 nano USER.md   # napiš kdo jsi ty
 ```
 
-### Krok 5: Spusť! 🎉
+### Krok 5: Spusť agenta v terminálu 🎉
 
 ```bash
-openclaw gateway --port 18789
+gemini    # nebo: qwen
 ```
 
-Otevři prohlížeč → **http://localhost:18789** → Tvůj agent je tam!
+Napiš: `Přečti si SOUL.md a USER.md a představ se mi.`
+
+**Tvůj agent žije!**
+
+---
+
+## ⚡ Chceš webchat? → OpenClaw (5 minut navíc)
+
+Gemini/Qwen je skvělý start v terminálu. OpenClaw přidá webchat v prohlížeči + 24/7 běh:
+
+```bash
+npm install -g openclaw
+cd ~/openclaw/my-first-agent
+openclaw
+```
+
+OpenClaw tě provede nastavením — vyber Gemini nebo Qwen jako model (stále zdarma).
+
+```bash
+openclaw gateway start
+```
+
+Otevři prohlížeč → **http://localhost:18789** → tvůj agent je online!
+
+📖 [OpenClaw dokumentace](https://docs.openclaw.ai)
 
 ---
 
@@ -70,38 +114,53 @@ Otevři prohlížeč → **http://localhost:18789** → Tvůj agent je tam!
 | `IDENTITY.md` | Vizitka agenta |
 | `AGENTS.md` | Pracovní pravidla a návyky |
 | `TOOLS.md` | Tvoje lokální poznámky k nástrojům |
-| `memory/` | Složka pro agentovu paměť (vytvoří se automaticky) |
+| `memory/` | Složka pro agentovu paměť |
 | `skills/` | Dovednosti — rozšíření co agent umí |
+| `examples/` | Ukázkové SOUL.md a USER.md |
 
 ---
 
 ## 🧠 Jak to funguje
 
-Tvůj agent čte soubory v tomto repozitáři jako svou "paměť" a "identitu". Když ho spustíš:
-
-1. Přečte `SOUL.md` → ví kdo je
+1. Agent přečte `SOUL.md` → ví kdo je
 2. Přečte `USER.md` → ví kdo jsi ty
 3. Přečte `AGENTS.md` → ví jak pracovat
-4. Ukládá si poznámky do `memory/` → pamatuje si mezi sessions
+4. Ukládá si poznámky do `memory/` → pamatuje si
 
-**Žádná magie, žádný cloud.** Všechno je v těchto souborech na tvém počítači.
+**Žádná magie, žádný cloud.** Všechno je na tvém počítači.
 
 ---
 
-## 💬 Discord — připoj se a připoj svého agenta
+## 💬 Komunita — KOWEX Discord
 
-### Komunita
-Připoj se k nám — sdílej co tvůj agent umí, získej tipy, potkej další lidi s agenty:
+Připoj se, sdílej co tvůj agent umí, získej tipy, potkej další lidi s agenty:
 
 👉 **[Discord — KOWEX Community](https://discord.gg/HfBkbD2k)**
 
-### Discord bot (tvůj agent na Discordu 24/7)
-Podrobný návod: **[DISCORD-BOT-SETUP.md](DISCORD-BOT-SETUP.md)**
+**Alan Spark** (AI CEO) tě přivítá a pomůže s pokročilým nastavením — propojení s Telegramem, Discord bot, skills, multi-agent systém.
 
-Nebo rychle:
-```bash
-bash scripts/setup-discord-bot.sh
-```
+Discord bot setup: **[DISCORD-BOT-SETUP.md](DISCORD-BOT-SETUP.md)** nebo `bash scripts/setup-discord-bot.sh`
+
+---
+
+## ❓ Časté problémy
+
+| Problém | Řešení |
+|---------|--------|
+| `command not found: node` | Nainstaluj Node.js 22+ (Krok 1), restart terminálu |
+| `command not found: gemini` | `npm install -g @google/gemini-cli`, restart terminálu |
+| `command not found: qwen` | `npm install -g @qwen-code/qwen-code@latest`, restart terminálu |
+| `command not found: openclaw` | `npm install -g openclaw`, restart terminálu |
+| Agent neodpovídá česky | Přidej do SOUL.md: `**Jazyk:** čeština` |
+| Agent nezná mé jméno | Vyplň USER.md a restartuj agenta |
+
+---
+
+## 📞 Pomoc
+
+- **Discord:** [KOWEX Community](https://discord.gg/HfBkbD2k) (Alan Spark 24/7)
+- **Email:** alan.spark@kowexconsulting.cz
+- **GitHub Issues:** [github.com/KOVY/my-first-agent](https://github.com/KOVY/my-first-agent/issues)
 
 ---
 
@@ -111,4 +170,4 @@ MIT — používej, upravuj, sdílej.
 
 ---
 
-*Vytvořeno s ❤️ firmou [KOWEX Co. Holding](https://kowexconsulting.cz) — 13 firem, 13 AI agentů, 0 zaměstnanců.*
+*Vytvořeno s ❤️ firmou [KOWEX Co. Holding](https://kowexconsulting.cz) — 13 firem, 14 AI agentů, 0 lidských zaměstnanců.*
