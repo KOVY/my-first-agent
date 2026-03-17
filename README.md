@@ -2,12 +2,26 @@
 
 **Za jedno odpoledne máš vlastního AI agenta. Zdarma.**
 
-Vlastní jméno, paměť, osobnost. Webchat v prohlížeči. Volitelně Discord bot 24/7.
+Vlastní jméno, paměť, osobnost. Webchat v prohlížeči. Dostupný z mobilu přes Tailscale. Volitelně Discord bot 24/7.
 Žádné programování, žádná kreditka.
 
 ---
 
 ## 🚀 Rychlý start
+
+### Krok 0: Nainstaluj Tailscale (bezpečný vzdálený přístup)
+
+> Tailscale ti dá soukromou IP adresu (`100.x.x.x`) — agent pak bude dostupný **odkudkoli**, nejen z localhost.
+
+| Systém | Postup |
+|--------|--------|
+| **Windows** | Stáhni: [tailscale-setup-1.94.2.exe](https://pkgs.tailscale.com/stable/tailscale-setup-1.94.2.exe) |
+| **Mac** | `brew install tailscale` nebo [tailscale.com/download/mac](https://tailscale.com/download/mac) |
+| **Linux** | `curl -fsSL https://tailscale.com/install.sh \| sh && sudo tailscale up` |
+
+```bash
+tailscale ip   # poznamenej si svou 100.x.x.x adresu
+```
 
 ### Krok 1: Nainstaluj Node.js 22+
 
@@ -57,51 +71,53 @@ npm install -g @qwen-code/qwen-code@latest
 qwen      # napiš /auth → přihlas se v prohlížeči
 ```
 
-### Krok 4: Stáhni repo a uprav identitu
+### Krok 4: Stáhni repo a nastav identitu agenta
 
 ```bash
 mkdir -p ~/openclaw && cd ~/openclaw
 git clone https://github.com/KOVY/my-first-agent.git
 cd my-first-agent
+```
 
-# Zkopíruj příklady a uprav
+**Doporučeno — interaktivní setup skript:**
+```bash
+bash scripts/setup.sh
+```
+Skript se tě zeptá na jméno agenta, styl a tvoje jméno — a za 30 sekund máš hotovo.
+
+**Nebo ručně:**
+```bash
 cp examples/SOUL-example.md SOUL.md
 cp examples/USER-example.md USER.md
 nano SOUL.md   # dej agentovi jméno a osobnost
 nano USER.md   # napiš kdo jsi ty
 ```
 
-### Krok 5: Spusť agenta v terminálu 🎉
+### Krok 5: Spusť agenta! 🎉
 
+**V terminálu (Gemini nebo Qwen):**
 ```bash
 gemini    # nebo: qwen
 ```
-
 Napiš: `Přečti si SOUL.md a USER.md a představ se mi.`
 
-**Tvůj agent žije!**
+**Nebo jako webchat (OpenClaw):**
+```bash
+npm install -g openclaw
+openclaw gateway start
+```
+Otevři prohlížeč → **http://localhost:18789**
 
 ---
 
-## ⚡ Chceš webchat? → OpenClaw (5 minut navíc)
+## 📱 Přístup z mobilu (přes Tailscale)
 
-Gemini/Qwen je skvělý start v terminálu. OpenClaw přidá webchat v prohlížeči + 24/7 běh:
+Díky Tailscale (Krok 0) je agent dostupný i z mobilu, tabletu nebo jiného počítače:
 
-```bash
-npm install -g openclaw
-cd ~/openclaw/my-first-agent
-openclaw
 ```
-
-OpenClaw tě provede nastavením — vyber Gemini nebo Qwen jako model (stále zdarma).
-
-```bash
-openclaw gateway start
+http://100.x.x.x:18789
 ```
-
-Otevři prohlížeč → **http://localhost:18789** → tvůj agent je online!
-
-📖 [OpenClaw dokumentace](https://docs.openclaw.ai)
+*(místo `100.x.x.x` dosaď svou Tailscale IP — zjistíš ji příkazem `tailscale ip`)*
 
 ---
 
@@ -116,7 +132,8 @@ Otevři prohlížeč → **http://localhost:18789** → tvůj agent je online!
 | `TOOLS.md` | Tvoje lokální poznámky k nástrojům |
 | `memory/` | Složka pro agentovu paměť |
 | `skills/` | Dovednosti — rozšíření co agent umí |
-| `examples/` | Ukázkové SOUL.md a USER.md |
+| `scripts/setup.sh` | Interaktivní nastavení agenta (jméno, styl, jazyk) |
+| `examples/` | Ukázkové soubory a config šablona |
 
 ---
 
@@ -137,7 +154,7 @@ Připoj se, sdílej co tvůj agent umí, získej tipy, potkej další lidi s age
 
 👉 **[Discord — KOWEX Community](https://discord.gg/HfBkbD2k)**
 
-**Alan Spark** (AI CEO) tě přivítá a pomůže s pokročilým nastavením — propojení s Telegramem, Discord bot, skills, multi-agent systém.
+**Alan Spark** (AI CEO) tě přivítá a pomůže s pokročilým nastavením.
 
 Discord bot setup: **[DISCORD-BOT-SETUP.md](DISCORD-BOT-SETUP.md)** nebo `bash scripts/setup-discord-bot.sh`
 
@@ -153,6 +170,7 @@ Discord bot setup: **[DISCORD-BOT-SETUP.md](DISCORD-BOT-SETUP.md)** nebo `bash s
 | `command not found: openclaw` | `npm install -g openclaw`, restart terminálu |
 | Agent neodpovídá česky | Přidej do SOUL.md: `**Jazyk:** čeština` |
 | Agent nezná mé jméno | Vyplň USER.md a restartuj agenta |
+| Tailscale IP nezobrazuje | Ujisti se že Tailscale je přihlášen: `tailscale status` |
 
 ---
 
@@ -170,4 +188,4 @@ MIT — používej, upravuj, sdílej.
 
 ---
 
-*Vytvořeno s ❤️ firmou [KOWEX Co. Holding](https://kowexconsulting.cz) — 13 firem, 14 AI agentů, 0 lidských zaměstnanců.*
+*Vytvořeno s ❤️ firmou [KOWEX Co. Holding](https://kowexconsulting.cz) — 14 firem, 14 AI agentů, 0 lidských zaměstnanců.*

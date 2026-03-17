@@ -1,0 +1,22 @@
+{
+  "gateway": {
+    "port": 18789,
+    "bind": "127.0.0.1",
+    "token": "NAHRAD_TIMTO_SVYM_TOKENEM"
+  },
+
+  "models": {
+    "default": "gemini-pro"
+  },
+
+  "channels": {
+    "discord": {
+      "enabled": false,
+      "token": "TVUJ_DISCORD_BOT_TOKEN_SEM"
+    }
+  },
+
+  "workspace": {
+    "path": "~/openclaw/my-first-agent"
+  }
+}

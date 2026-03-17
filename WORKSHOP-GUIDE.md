@@ -9,9 +9,38 @@
 
 ✅ Vlastního AI agenta s jménem, pamětí a osobností
 ✅ Agent v terminálu (Gemini nebo Qwen — zdarma)
-✅ Webchat v prohlížeči (OpenClaw)
+✅ Webchat v prohlížeči (OpenClaw — volitelné)
+✅ Agent dostupný z mobilu odkudkoli (Tailscale)
 ✅ Připojení na Discord komunitu
 ✅ Zdarma — žádná kreditka
+
+---
+
+## Fáze 0: Tailscale — bezpečný přístup odkudkoli (2 minuty)
+
+> 💡 **Proč Tailscale?** Tailscale vytváří bezpečnou soukromou síť mezi tvými zařízeními. Agent bude dostupný odkudkoli — z mobilu, z práce, z domu. **Bez otevírání portů, bez VPN, bez složitého nastavení.**
+
+### Co Tailscale udělá za tebe
+
+- Přidělí ti IP adresu ve tvaru `100.x.x.x`
+- Na té adrese přistoupíš ke svému agentovi **odkudkoli**
+- Všechno je šifrované — nikdo jiný se nedostane k tvému agentovi
+
+### Krok 0: Nainstaluj Tailscale
+
+| Systém | Postup |
+|--------|--------|
+| **Windows** | Stáhni a spusť: [tailscale-setup-1.94.2.exe](https://pkgs.tailscale.com/stable/tailscale-setup-1.94.2.exe) |
+| **Mac** | `brew install tailscale` nebo stáhni z [tailscale.com/download/mac](https://tailscale.com/download/mac) |
+| **Linux** | `curl -fsSL https://tailscale.com/install.sh \| sh && sudo tailscale up` |
+
+Po instalaci se přihlas (Google nebo GitHub účet) — je to **zdarma**.
+
+```bash
+tailscale ip   # zjisti svou 100.x.x.x adresu — poznamenej si ji
+```
+
+> ✅ **Checkpoint:** Vidíš adresu začínající `100.` — Tailscale funguje!
 
 ---
 
@@ -146,26 +175,30 @@ Ukonči: `Ctrl + C`
 
 ## Fáze 3: Dej agentovi identitu (10 minut)
 
-### Krok 6: Vyplň SOUL.md — kdo je tvůj agent
+### Krok 6: Dej agentovi jméno a osobnost
 
+**Doporučeno — interaktivní skript (30 sekund):**
+```bash
+bash scripts/setup.sh
+```
+Skript se tě zeptá na:
+- **Jméno agenta** (např. Nova, Atlas, Zora, Max...)
+- **Styl osobnosti** (profesionální / přátelský / vtipný / vlastní)
+- **Tvoje jméno** (aby tě agent znal)
+- **Jazyk** (čeština nebo angličtina)
+
+A automaticky vygeneruje `SOUL.md` a `USER.md`.
+
+**Nebo ručně (plná kontrola):**
 ```bash
 cp examples/SOUL-example.md SOUL.md
-nano SOUL.md   # uprav podle sebe
+nano SOUL.md   # uprav podle sebe (uložit: Ctrl+O, ukončit: Ctrl+X)
+cp examples/USER-example.md USER.md
+nano USER.md   # napiš kdo jsi ty
 ```
 > (nebo `code SOUL.md` pokud máš VS Code)
 
-Vyplň: jméno, osobnost, hodnoty, styl. Čím víc detailů, tím víc je agent "tvůj".
-
-### Krok 7: Vyplň USER.md — kdo jsi ty
-
-```bash
-cp examples/USER-example.md USER.md
-nano USER.md   # uprav podle sebe
-```
-
-Napiš: své jméno, jak tě má oslovovat, čím se zabýváš.
-
-### Krok 8: Spusť agenta s identitou 🎉
+### Krok 7: Spusť agenta s identitou 🎉
 
 ```bash
 gemini    # nebo: qwen
@@ -184,7 +217,7 @@ Přečti si SOUL.md a USER.md a představ se mi. Kdo jsi a kdo jsem já?
 
 ## Fáze 4: OpenClaw — webchat v prohlížeči (10 minut)
 
-### Krok 9: Nainstaluj OpenClaw
+### Krok 8: Nainstaluj OpenClaw
 
 ```bash
 npm install -g openclaw
@@ -192,18 +225,16 @@ npm install -g openclaw
 
 > 💡 Pokud `openclaw` příkaz nefunguje → zavři a znovu otevři terminál (PATH z Kroku 4).
 
-### Krok 10: Nastav OpenClaw
+### Krok 9: Nastav OpenClaw
 
 ```bash
 cd ~/openclaw/my-first-agent
 openclaw
 ```
 
-OpenClaw tě provede nastavením:
-- **Model:** vyber Gemini nebo Qwen (stále zdarma)
-- Ostatní nastavení přeskoč (Enter) — dodáme na Discordu
+OpenClaw tě provede nastavením — vyber Gemini nebo Qwen jako model (stále zdarma).
 
-### Krok 11: Spusť webchat! 🌐
+### Krok 10: Spusť webchat! 🌐
 
 ```bash
 openclaw gateway start
@@ -211,18 +242,19 @@ openclaw gateway start
 
 Otevři prohlížeč → **http://localhost:18789**
 
-Tvůj agent je online! Napíš mu:
+**Přístup z mobilu nebo jiného zařízení (přes Tailscale):**
 ```
-Ahoj, kdo jsi? Co všechno umíš?
+http://100.x.x.x:18789
 ```
+*(místo `100.x.x.x` dosaď svou Tailscale IP z Fáze 0)*
 
-> ✅ **Checkpoint:** Webchat funguje, agent odpovídá v prohlížeči.
+> ✅ **Checkpoint:** Webchat funguje, agent odpovídá v prohlížeči a je dostupný z mobilu!
 
 ---
 
 ## Fáze 5: Komunita — KOWEX Discord (5 minut)
 
-### Krok 12: Připoj se na Discord
+### Krok 11: Připoj se na Discord
 
 1. Otevři **https://discord.gg/HfBkbD2k**
 2. Vytvoř účet nebo se přihlas
@@ -232,7 +264,6 @@ Ahoj, kdo jsi? Co všechno umíš?
 - 🔌 Propojení agenta s Telegramem, Discordem, emailem
 - 🧩 Instalace skills (počasí, web search, email...)
 - 🤖 Pokročilé funkce (paměť, cron joby, multi-agent)
-- 💡 Inspirace co všechno tvůj agent umí
 
 ### Discord bot (volitelné)
 
@@ -260,6 +291,8 @@ Nebo podrobný návod: [DISCORD-BOT-SETUP.md](DISCORD-BOT-SETUP.md)
 | Sudo heslo se nezobrazuje | Normální — piš a stiskni Enter |
 | OpenClaw se ptá na API klíč | Přeskoč (Enter), nastav Gemini/Qwen |
 | Webchat nejde otevřít | `openclaw gateway status`, případně restart |
+| Tailscale IP nezobrazuje | `tailscale status` — ujisti se že jsi přihlášen |
+| Mobil nevidí agenta | Oba přístroje musí být ve stejné Tailscale síti |
 
 ---
 
@@ -267,14 +300,15 @@ Nebo podrobný návod: [DISCORD-BOT-SETUP.md](DISCORD-BOT-SETUP.md)
 
 | Čas | Fáze | Co děláme |
 |-----|------|-----------|
-| 0:00–0:10 | 1. Základy | Node.js 22+, Git, PATH, repo |
-| 0:10–0:15 | 2. AI Engine | Gemini nebo Qwen — první konverzace |
-| 0:15–0:25 | 3. Identita | SOUL.md, USER.md — agent je "tvůj" |
-| 0:25–0:35 | 4. OpenClaw | Webchat v prohlížeči |
-| 0:35–0:40 | 5. Komunita | Discord — sdílení a networking |
-| 0:40+ | Bonus | Customizace, skills, propojení, experimenty |
+| 0:00–0:02 | 0. Tailscale | Instalace, bezpečný přístup odkudkoli |
+| 0:02–0:12 | 1. Základy | Node.js 22+, Git, PATH, repo |
+| 0:12–0:17 | 2. AI Engine | Gemini nebo Qwen — první konverzace |
+| 0:17–0:27 | 3. Identita | setup.sh nebo SOUL.md + USER.md ručně |
+| 0:27–0:37 | 4. OpenClaw | Webchat v prohlížeči |
+| 0:37–0:42 | 5. Komunita | Discord — sdílení a networking |
+| 0:42+ | Bonus | Mobil přes Tailscale, Discord bot, skills, experimenty |
 
-> 💡 **Realisticky:** Počítej 60–90 minut celkem (lidi mají různé systémy). Zbytek = hraní si s agentem, sdílení na Discordu, networking.
+> 💡 **Realisticky:** Počítej 60–90 minut celkem. Zbytek = hraní si s agentem, sdílení na Discordu, networking.
 
 ---
 
@@ -287,4 +321,4 @@ Nebo podrobný návod: [DISCORD-BOT-SETUP.md](DISCORD-BOT-SETUP.md)
 ---
 
 *Vytvořeno pro Phantom Office Workshop — KOWEX Co. Holding*
-*Aktualizováno: 9. března 2026*
+*Aktualizováno: 17. března 2026*
