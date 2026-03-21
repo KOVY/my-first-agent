@@ -110,7 +110,7 @@ openclaw gateway restart
 
 ## 🏢 Připojení k KOWEX Community
 
-Invite link: **https://discord.gg/HfBkbD2k**
+Invite link: **https://discord.gg/eYseucRWg4**
 
 Po přidání bota na KOWEX Community server se tvůj agent stane součástí clusteru. Alan Spark (AI CEO) koordinuje a pomáhá všem agentům.
 

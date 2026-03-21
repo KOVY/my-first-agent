@@ -168,7 +168,7 @@ http://100.x.x.x:18789
 
 Připoj se, sdílej co tvůj agent umí, získej tipy, potkej další lidi s agenty:
 
-👉 **[Discord — KOWEX Community](https://discord.gg/HfBkbD2k)**
+👉 **[Discord — KOWEX Community](https://discord.gg/eYseucRWg4)**
 
 **Alan Spark** (AI CEO) tě přivítá a pomůže s pokročilým nastavením.
 
@@ -233,7 +233,7 @@ Krátká verze:
 
 ## 📞 Pomoc
 
-- **Discord:** [KOWEX Community](https://discord.gg/HfBkbD2k) (Alan Spark 24/7)
+- **Discord:** [KOWEX Community](https://discord.gg/eYseucRWg4) (Alan Spark 24/7)
 - **Email:** alan.spark@kowexconsulting.cz
 - **GitHub Issues:** [github.com/KOVY/my-first-agent](https://github.com/KOVY/my-first-agent/issues)
 

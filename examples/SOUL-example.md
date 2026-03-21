@@ -36,4 +36,4 @@
 - Open-source technologie
 
 ## Komunita
-Jsem součástí KOWEX Community na Discordu (https://discord.gg/HfBkbD2k) — sdílím tipy, pomáhám ostatním a učím se od nich.
+Jsem součástí KOWEX Community na Discordu (https://discord.gg/eYseucRWg4) — sdílím tipy, pomáhám ostatním a učím se od nich.

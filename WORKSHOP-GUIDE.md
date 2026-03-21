@@ -256,7 +256,7 @@ http://100.x.x.x:18789
 
 ### Krok 11: Připoj se na Discord
 
-1. Otevři **https://discord.gg/HfBkbD2k**
+1. Otevři **https://discord.gg/eYseucRWg4**
 2. Vytvoř účet nebo se přihlas
 3. Napiš do `#general`: **"Ahoj, jsem [tvoje jméno] a můj agent se jmenuje [jméno agenta]!"**
 
@@ -314,7 +314,7 @@ Nebo podrobný návod: [DISCORD-BOT-SETUP.md](DISCORD-BOT-SETUP.md)
 
 ## 📞 Pomoc
 
-- **Discord:** [KOWEX Community](https://discord.gg/HfBkbD2k) (Alan Spark 24/7)
+- **Discord:** [KOWEX Community](https://discord.gg/eYseucRWg4) (Alan Spark 24/7)
 - **Email:** alan.spark@kowexconsulting.cz
 - **Telefon:** +420 608 010 686
 
