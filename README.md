@@ -71,13 +71,29 @@ npm install -g @qwen-code/qwen-code@latest
 qwen      # napiš /auth → přihlas se v prohlížeči
 ```
 
-### Krok 4: Stáhni repo a nastav identitu agenta
+### Krok 4: Stáhni repo a spusť OpenClaw
+
+> 💡 **Nejdřív spustíme agenta, pak mu dáme jméno a osobnost.** Hned uvidíš že funguje!
 
 ```bash
 mkdir -p ~/openclaw && cd ~/openclaw
 git clone https://github.com/KOVY/my-first-agent.git
 cd my-first-agent
 ```
+
+**Nainstaluj a spusť OpenClaw:**
+```bash
+npm install -g openclaw
+openclaw gateway start
+```
+
+Otevři prohlížeč → **http://localhost:18789** — agent už odpovídá! 🎉
+
+> Agent zatím nemá jméno ani osobnost — to nastavíš v dalším kroku. Ale už teď si s ním můžeš psát.
+
+### Krok 5: Dej agentovi jméno a osobnost
+
+Teď když víš že agent funguje, dej mu identitu:
 
 **Doporučeno — interaktivní setup skript:**
 ```bash
@@ -93,20 +109,20 @@ nano SOUL.md   # dej agentovi jméno a osobnost
 nano USER.md   # napiš kdo jsi ty
 ```
 
-### Krok 5: Spusť agenta! 🎉
+**Restartuj gateway** aby agent načetl novou identitu:
+```bash
+openclaw gateway restart
+```
 
-**V terminálu (Gemini nebo Qwen):**
+Napiš v chatu: `Představ se mi.` — a agent ti odpoví s novým jménem! ✨
+
+### Krok 6: (Volitelně) Spusť v terminálu
+
+Pokud chceš agenta i přímo v terminálu (bez webchatu):
 ```bash
 gemini    # nebo: qwen
 ```
 Napiš: `Přečti si SOUL.md a USER.md a představ se mi.`
-
-**Nebo jako webchat (OpenClaw):**
-```bash
-npm install -g openclaw
-openclaw gateway start
-```
-Otevři prohlížeč → **http://localhost:18789**
 
 ---
 
@@ -156,7 +172,16 @@ Připoj se, sdílej co tvůj agent umí, získej tipy, potkej další lidi s age
 
 **Alan Spark** (AI CEO) tě přivítá a pomůže s pokročilým nastavením.
 
-Discord bot setup: **[DISCORD-BOT-SETUP.md](DISCORD-BOT-SETUP.md)** nebo `bash scripts/setup-discord-bot.sh`
+---
+
+## 🤖 Discord bot — agent 24/7 na serveru
+
+Chceš aby tvůj agent odpovídal i na Discordu? Celý návod: **[DISCORD-BOT-SETUP.md](DISCORD-BOT-SETUP.md)**
+
+Krátká verze:
+1. Vytvoříš bota na Discord Developer Portal (2 min)
+2. Propojíš ho s OpenClaw (1 příkaz)
+3. **Invite link** na KOWEX Community server za tebe spustí Alan Spark — stačí mu ho poslat
 
 ---
 
@@ -169,8 +194,9 @@ Discord bot setup: **[DISCORD-BOT-SETUP.md](DISCORD-BOT-SETUP.md)** nebo `bash s
 | `command not found: qwen` | `npm install -g @qwen-code/qwen-code@latest`, restart terminálu |
 | `command not found: openclaw` | `npm install -g openclaw`, restart terminálu |
 | Agent neodpovídá česky | Přidej do SOUL.md: `**Jazyk:** čeština` |
-| Agent nezná mé jméno | Vyplň USER.md a restartuj agenta |
+| Agent nezná mé jméno | Vyplň USER.md a restartuj: `openclaw gateway restart` |
 | Tailscale IP nezobrazuje | Ujisti se že Tailscale je přihlášen: `tailscale status` |
+| Agent nemá osobnost | Spusť `bash scripts/setup.sh` a pak `openclaw gateway restart` |
 
 ---
 

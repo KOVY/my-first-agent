@@ -25,7 +25,7 @@ Na stejné stránce (Bot) sjeď dolů k **Privileged Gateway Intents** a zapni:
 - ✅ **Server Members Intent** (bot vidí členy)
 - Klikni **Save Changes**
 
-## Krok 4: Přidej bota na server (1 minuta)
+## Krok 4: Vygeneruj invite link (1 minuta)
 
 1. V levém menu klikni **OAuth2**
 2. V sekci **OAuth2 URL Generator** zaškrtni:
@@ -38,16 +38,24 @@ Na stejné stránce (Bot) sjeď dolů k **Privileged Gateway Intents** a zapni:
    - Embed Links
    - Attach Files
    - Add Reactions
-4. **Zkopíruj URL** dole na stránce
-5. Otevři URL v prohlížeči
+4. **Zkopíruj URL** dole na stránce — to je tvůj **invite link**
 
-> ⚠️ **Důležité:** Musíš být přihlášený jako **vlastník serveru** (ne jako bot účet). Pokud nevidíš server v seznamu, přihlas se správným účtem.
+## Krok 5: Přidej bota na KOWEX Community server
 
-6. Vyber server → **Continue** → **Authorize**
+> ⚡ **Invite link nespouštěj sám** — musí ho otevřít správce serveru.
 
-## Krok 5: Propoj s OpenClaw (1 minuta)
+**Pošli invite link Alanovi** jedním z těchto způsobů:
+- 💬 **Telegram:** pošli odkaz přímo Dušanovi nebo Alanovi
+- 📧 **Email:** alan.spark@kowexconsulting.cz
+- 🌐 **Workshop:** řekni organizátorovi ať ti to přidá na místě
 
-> 💡 **Zkratka:** `bash scripts/setup-discord-bot.sh` — provede kroky 5-6 automaticky!
+Alan Spark (AI CEO) invite link otevře a autorizuje bota na KOWEX Community server. Obvykle do pár minut.
+
+> 💡 **Proč to dělá Alan?** Invite link musí otevřít někdo kdo je administrátor cílového serveru. Ty jsi admin svého bota, Alan je admin KOWEX Community — každý schvaluje svou část.
+
+## Krok 6: Propoj s OpenClaw (1 minuta)
+
+> 💡 **Zkratka:** `bash scripts/setup-discord-bot.sh` — provede tento krok automaticky!
 
 V terminálu na svém počítači:
 
@@ -57,9 +65,9 @@ openclaw config set channels.discord.token "TVŮJ_BOT_TOKEN"
 openclaw gateway restart
 ```
 
-## Krok 6: Ověř (30 sekund)
+## Krok 7: Ověř (30 sekund)
 
-Na Discordu napiš do kanálu:
+Na KOWEX Community Discordu napiš do kanálu:
 ```
 @JménoTvéhoBota ahoj!
 ```
@@ -71,7 +79,7 @@ Měl by odpovědět! 🎉
 ## ❓ Problémy
 
 ### "Přidat na server" — seznam je prázdný
-Jsi přihlášený špatným účtem. Odhlás se a přihlas jako vlastník serveru.
+To je v pořádku! Invite link nespouštěj sám — pošli ho Alanovi (viz Krok 5).
 
 ### Bot neodpovídá
 1. Ověř že gateway běží: `openclaw gateway status`
@@ -87,6 +95,16 @@ To je správné chování! `requireMention: true` znamená že bot reaguje jen n
 openclaw config set channels.discord.guilds '{"ID_SERVERU": {"requireMention": false}}'
 openclaw gateway restart
 ```
+
+---
+
+## 📋 Shrnutí kroků
+
+| Krok | Kdo dělá | Co |
+|------|----------|----|
+| 1-4 | **Ty** | Vytvoříš bota + vygeneruješ invite link |
+| 5 | **Alan Spark** | Otevře invite link a autorizuje na serveru |
+| 6-7 | **Ty** | Propojíš s OpenClaw a ověříš |
 
 ---
 
