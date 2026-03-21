@@ -174,6 +174,37 @@ Připoj se, sdílej co tvůj agent umí, získej tipy, potkej další lidi s age
 
 ---
 
+## 💻 Volitelně: VS Code + Copilot (bonus)
+
+> Tohle **nepotřebuješ** — agent funguje v terminálu i v prohlížeči. Ale pokud chceš pohodlný editor se soubory a AI asistentem, VS Code je výborná volba.
+
+**Instalace:**
+
+| Systém | Postup |
+|--------|--------|
+| **Windows** | `winget install Microsoft.VisualStudioCode` nebo stáhni z [code.visualstudio.com](https://code.visualstudio.com) |
+| **Mac** | `brew install --cask visual-studio-code` |
+| **Linux** | `sudo snap install code --classic` |
+
+**Co získáš:**
+- 📂 Přehledný strom souborů (SOUL.md, USER.md, memory/ — všechno vidíš)
+- 💬 **Integrovaný terminál** — spustíš `qwen`, `gemini` nebo `openclaw` přímo v editoru
+- 🤖 **GitHub Copilot Free** — AI asistent přímo v editoru, zdarma:
+  - 2 000 doplnění kódu / měsíc
+  - 50 AI chat dotazů / měsíc
+  - Stačí GitHub účet (žádná kreditka)
+
+**Jak na to:**
+1. Nainstaluj VS Code (viz tabulka výše)
+2. Otevři složku agenta: `File → Open Folder → ~/openclaw/my-first-agent`
+3. Nainstaluj rozšíření **GitHub Copilot** (v Extensions → hledej "Copilot")
+4. Přihlas se GitHub účtem
+5. Otevři terminál v VS Code (`Ctrl+~`) a spusť svého agenta
+
+> 💡 **Tip pro firmy:** Pokud máte firemní Copilot licenci (součást Microsoft 365), máte neomezené AI dotazy + přístup k nejnovějším modelům (GPT-4o, Claude). Využijte to!
+
+---
+
 ## 🤖 Discord bot — agent 24/7 na serveru
 
 Chceš aby tvůj agent odpovídal i na Discordu? Celý návod: **[DISCORD-BOT-SETUP.md](DISCORD-BOT-SETUP.md)**
